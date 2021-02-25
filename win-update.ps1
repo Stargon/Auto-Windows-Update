@@ -1,4 +1,4 @@
-﻿#Requires -RunAsAdministrator
+#Requires -RunAsAdministrator
 if (Get-Module -ListAvailable -Name PSWindowsUpdate) {
     Write-Host "Updating module if available..."
     Update-Module -Name PSWindowsUpdate
@@ -9,5 +9,5 @@ else {
 }
 Get-Package -Name PSWindowsUpdate
 Get-WindowsUpdate
-Add-WUServiceManager -MicrosoftUpdate -AcceptAll
+Add-WUServiceManager -MicrosoftUpdate 
 Install-WindowsUpdate -MicrosoftUpdate -AcceptAll
