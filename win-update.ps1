@@ -3,8 +3,12 @@
 # found.
 
 # Specify available params:
-#   -restart: restart the computer after the updates are installed
-param([Parameter(Mandatory = $false)][switch]$restart)
+#   - restart: restart the computer after the updates are installed
+#   - kb: string of kb values to pass to the script
+param(
+    [Parameter(Mandatory = $false)][switch]$restart,
+    [string]$kb
+)
 
 # Check if PSWindowsUpdate exists, update if it is
 if (Get-Module -ListAvailable -Name PSWindowsUpdate) {
