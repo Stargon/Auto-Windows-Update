@@ -10,25 +10,32 @@ param(
     [string]$kb
 )
 
-# Check if PSWindowsUpdate exists, update if it is
-if (Get-Module -ListAvailable -Name PSWindowsUpdate) {
-    Write-Host "Update module if available..."
-    Update-Module -Name PSWindowsUpdate
-} 
-else {
-    Install-PackageProvider -Name NuGet -Force
-    Install-Module -Name PSWindowsUpdate -Force
+if($kb){
+    Write-Host "`r`nkb value given!`r`n"
+    Write-Host $kb
+} else {
+    Write-Host "No kb value given!"
 }
-Get-Package -Name PSWindowsUpdate
 
-# Begin picking up updates and install them
-Write-Host "`r`nUpdating..."
-Download-WindowsUpdate -MicrosoftUpdate -AcceptAll
-if ($restart) {
-    # Restart flag specified, allow reboot
-    Install-WindowsUpdate -MicrosoftUpdate -AcceptAll
-}
-else {
-    # (Default) Delay reboot
-    Install-WindowsUpdate -MicrosoftUpdate -AcceptAll -IgnoreReboot
-}
+# # Check if PSWindowsUpdate exists, update if it is
+# if (Get-Module -ListAvailable -Name PSWindowsUpdate) {
+#     Write-Host "Update module if available..."
+#     Update-Module -Name PSWindowsUpdate
+# } 
+# else {
+#     Install-PackageProvider -Name NuGet -Force
+#     Install-Module -Name PSWindowsUpdate -Force
+# }
+# Get-Package -Name PSWindowsUpdate
+
+# # Begin picking up updates and install them
+# Write-Host "`r`nUpdating..."
+# Download-WindowsUpdate -MicrosoftUpdate -AcceptAll
+# if ($restart) {
+#     # Restart flag specified, allow reboot
+#     Install-WindowsUpdate -MicrosoftUpdate -AcceptAll
+# }
+# else {
+#     # (Default) Delay reboot
+#     Install-WindowsUpdate -MicrosoftUpdate -AcceptAll -IgnoreReboot
+# }
