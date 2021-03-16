@@ -7,7 +7,7 @@
 #   - kb: string of kb values to pass to the script
 param(
     [Parameter(Mandatory = $false)][switch]$restart,
-    [string]$kb
+    [string[]]$kb
 )
 
 # Check if PSWindowsUpdate exists, update if it is
@@ -23,20 +23,33 @@ Get-Package -Name PSWindowsUpdate
 
 # Begin picking up updates and install them
 Write-Host "`r`nUpdating..."
-Download-WindowsUpdate -MicrosoftUpdate -AcceptAll
-if ($restart) {
-    if ($kb) {
-        Install-WindowsUpdate -MicrosoftUpdate -AcceptAll -KBArticleID $kb
+if($kb){
+    Write-Host "`r`nFound!"
+    # kb arguments are separated by commas in the command line, delimited by
+    # space in the variable
+    Write-Host $kb
+    Write-Host "`r`nKB Iterated:"
+    # Format to iterate multiple arguments 
+    foreach($kbName in $kb){
+        Write-Host $kbName
     }
-    else {
-        Install-WindowsUpdate -MicrosoftUpdate -AcceptAll
-    }
+} else {
+    Write-Host "`r`nNot Found!"
 }
-else {
-    if ($kb) {
-        Install-WindowsUpdate -MicrosoftUpdate -AcceptAll -IgnoreReboot -KBArticleID $kb
-    }
-    else {
-        Install-WindowsUpdate -MicrosoftUpdate -AcceptAll -IgnoreReboot
-    }
-}
+# Download-WindowsUpdate -MicrosoftUpdate -AcceptAll
+# if ($restart) {
+#     if ($kb) {
+#         Install-WindowsUpdate -MicrosoftUpdate -AcceptAll -KBArticleID $kb
+#     }
+#     else {
+#         Install-WindowsUpdate -MicrosoftUpdate -AcceptAll
+#     }
+# }
+# else {
+#     if ($kb) {
+#         Install-WindowsUpdate -MicrosoftUpdate -AcceptAll -IgnoreReboot -KBArticleID $kb
+#     }
+#     else {
+#         Install-WindowsUpdate -MicrosoftUpdate -AcceptAll -IgnoreReboot
+#     }
+# }
