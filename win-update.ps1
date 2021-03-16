@@ -23,15 +23,20 @@ Get-Package -Name PSWindowsUpdate
 
 # Begin picking up updates and install them
 Write-Host "`r`nUpdating..."
-if ($kb) {
-    Download-WindowsUpdate -MicrosoftUpdate -AcceptAll -KBArticleID $kb
-}
-else {
-    Download-WindowsUpdate -MicrosoftUpdate -AcceptAll
-}
+Download-WindowsUpdate -MicrosoftUpdate -AcceptAll
 if ($restart) {
-    Install-WindowsUpdate -MicrosoftUpdate -AcceptAll
+    if ($kb) {
+        Install-WindowsUpdate -MicrosoftUpdate -AcceptAll -KBArticleID $kb
+    }
+    else {
+        Install-WindowsUpdate -MicrosoftUpdate -AcceptAll
+    }
 }
 else {
-    Install-WindowsUpdate -MicrosoftUpdate -AcceptAll -IgnoreReboot
+    if ($kb) {
+        Install-WindowsUpdate -MicrosoftUpdate -AcceptAll -IgnoreReboot -KBArticleID $kb
+    }
+    else {
+        Install-WindowsUpdate -MicrosoftUpdate -AcceptAll -IgnoreReboot
+    }
 }
