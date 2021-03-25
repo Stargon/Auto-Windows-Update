@@ -34,12 +34,16 @@ if ($restart) {
         # 1 hour = 3600 seconds
         if ($kb) {
             Install-WindowsUpdate -MicrosoftUpdate -AcceptAll -IgnoreReboot -KBArticleID $kb
+            Write-Host "`r`nWait before rebooting..."
             Start-Sleep -Seconds ([decimal]$time * 3600)
+            Write-Host "`r`nRebooting..."
             Restart-Computer
         }
         else {
             Install-WindowsUpdate -MicrosoftUpdate -AcceptAll -IgnoreReboot
+            Write-Host "`r`nWait before rebooting..."
             Start-Sleep -Seconds ([decimal]$time * 3600)
+            Write-Host "`r`nRebooting..."
             Restart-Computer
         }
     }
