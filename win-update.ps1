@@ -1,4 +1,4 @@
-﻿#Requires -RunAsAdministrator
+#Requires -RunAsAdministrator
 # Script will run, without prompting, Windows Update and install any updates 
 # found.
 
@@ -9,7 +9,7 @@
 param(
     [Parameter(Mandatory = $false)][switch]$restart,
     [string[]]$kb,
-    [string[]]$time
+    [string]$time
 )
 
 # Check if PSWindowsUpdate exists, update if it is
